@@ -25,3 +25,6 @@ replay_pid*
 
 # Maven build output
 target/
+
+# Local environment files (never commit real credentials)
+.env
