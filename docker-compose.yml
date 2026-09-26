@@ -1,0 +1,23 @@
+name: enterprise-servicedesk
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: servicedesk-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-servicedesk}
+      POSTGRES_USER: ${POSTGRES_USER:-servicedesk}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-servicedesk}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - servicedesk-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-servicedesk} -d ${POSTGRES_DB:-servicedesk}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  servicedesk-postgres-data:
