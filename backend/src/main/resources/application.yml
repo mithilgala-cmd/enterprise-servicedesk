@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: enterprise-servicedesk
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:servicedesk}
+    username: ${POSTGRES_USER:servicedesk}
+    password: ${POSTGRES_PASSWORD:servicedesk}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+server:
+  port: 8080
